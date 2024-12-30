@@ -8,7 +8,7 @@ class Instrument:
 
 
 class InstrumentsRepository:
-    cursos_file = '../data/instruments.csv'
+    cursos_file = '../s3_bucket_data/instruments.csv'
 
     def __init__(self):
         pass

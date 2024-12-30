@@ -1,0 +1,32 @@
+
+name: CI/CD done right
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+    deploy-to-dev:
+        name: Deploy to dev
+        uses: ./.github/workflows/deploy.yml
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
+        with:
+            environment: dev
+
+    test-dev:
+        uses: ./.github/workflows/test.yml
+        needs:
+            - deploy-to-dev
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
+        with:
+            environment: dev

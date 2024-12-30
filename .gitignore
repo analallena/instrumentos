@@ -1,1 +1,6 @@
 /.idea/*
+
+/infra/terraform.tfstate*
+/infra/.terraform.lock.hcl
+/infra/lambda_function.zip
+/infra/.terraform/

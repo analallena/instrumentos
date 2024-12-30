@@ -15,7 +15,6 @@ class ClassGroupsRepository:
         cursos = list()
         with open(file_path) as f:
             cursos_lines = f.readlines()
-            cursos_lines.pop(0)
 
         for curso in cursos_lines:
             cursos.append(curso.strip())
