@@ -20,14 +20,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v2'
-        with:
-          service_account: ${{ vars.SVCACCOUNT }}
-          workload_identity_provider: ${{ vars.WORKLOAD }}
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-
-      - name: Check bucket exists
-        run: gsutil ls gs://trunk-terraform-${{ inputs.environment }}
+#      - id: 'auth'
+#        uses: 'google-github-actions/auth@v2'
+#        with:
+#          service_account: ${{ vars.SVCACCOUNT }}
+#          workload_identity_provider: ${{ vars.WORKLOAD }}
+#
+#      - name: 'Set up Cloud SDK'
+#        uses: 'google-github-actions/setup-gcloud@v2'
+#
+#      - name: Check bucket exists
+#        run: gsutil ls gs://trunk-terraform-${{ inputs.environment }}
