@@ -1,7 +1,7 @@
-Instrument, Number
-Carrillón, 3
-Guitarra eléctrica, 2
-batería, 1
-triángulo, 7
-ukelele, 5
-flauta dulce, 12
+Instrument, Number, Minimum
+Carrillón, 3, 1
+Guitarra eléctrica, 2, 1
+batería, 1, 1
+triángulo, 7, 1
+ukelele, 5, 1
+flauta dulce, 12, 1

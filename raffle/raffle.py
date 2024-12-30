@@ -3,7 +3,6 @@ import logging
 
 
 class Raffle:
-
     def __init__(self, students, year_month, student_preferences):
         self.students = list(students)
         self.year_month = year_month
