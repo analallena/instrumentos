@@ -57,6 +57,7 @@ resource "aws_iam_role" "lambda_exec_role" {
   })
 }
 
+
 # Attach AWSLambdaBasicExecutionRole policy for CloudWatch logging
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
