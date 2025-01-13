@@ -1,9 +1,6 @@
 import logging
 import json
 import boto3
-import io
-from io import StringIO
-import pandas as pd
 
 from repositories.instruments_repo import InstrumentsRepository
 

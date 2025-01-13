@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "instruments-raffle" {
 }
 
 resource "aws_s3_object" "instrument-list" {
-  bucket = "${aws_s3_bucket.instruments-raffle.id}"
+  bucket = aws_s3_bucket.instruments-raffle.id
   key    = "general-data/instruments.csv"
   source = "../s3_bucket_data/instruments.csv"
 
@@ -31,7 +31,7 @@ resource "aws_s3_object" "instrument-list" {
 }
 
 resource "aws_s3_object" "students-1eso-A" {
-  bucket = "${aws_s3_bucket.instruments-raffle.id}"
+  bucket = aws_s3_bucket.instruments-raffle.id
   key    = "general-data/students_1ESO_A.csv"
   source = "../s3_bucket_data/students_1ESO_A.csv"
 
@@ -39,6 +39,27 @@ resource "aws_s3_object" "students-1eso-A" {
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
   etag = filemd5("../s3_bucket_data/students_1ESO_A.csv")
+}
+
+data "aws_iam_policy_document" "s3-editor-policy-document" {
+
+  statement {
+    actions   = ["s3:GetObject", "s3:PutObject"]
+    resources = [aws_s3_bucket.instruments-raffle.arn]
+    effect = "Allow"
+  }
+}
+
+resource "aws_iam_policy" "s3EditorPolicy" {
+  name        = "s3-editor-policy"
+  description = "S3 Editor policy"
+
+  policy = data.aws_iam_policy_document.s3-editor-policy-document.json
+}
+
+resource "aws_iam_group_policy_attachment" "aws_config_attach" {
+  group      = "s3-editor"
+  policy_arn = aws_iam_policy.s3EditorPolicy.arn
 }
 
 # IAM role for Lambda execution
