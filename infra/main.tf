@@ -41,26 +41,12 @@ resource "aws_s3_object" "students-1eso-A" {
   etag = filemd5("../s3_bucket_data/students_1ESO_A.csv")
 }
 
-data "aws_iam_policy_document" "s3-editor-policy-document" {
-
-  statement {
-    actions   = ["s3:GetObject", "s3:PutObject"]
-    resources = [aws_s3_bucket.instruments-raffle.arn]
-    effect = "Allow"
-  }
+module "s3_bucket_editor"{
+  source = "./modules/s3_bucket_editor"
+  s3-bucket-arn = aws_s3_bucket.instruments-raffle.arn
+  s3-bucket-editor-group = "s3-editor"
 }
 
-resource "aws_iam_policy" "s3EditorPolicy" {
-  name        = "s3-editor-policy"
-  description = "S3 Editor policy"
-
-  policy = data.aws_iam_policy_document.s3-editor-policy-document.json
-}
-
-resource "aws_iam_group_policy_attachment" "aws_config_attach" {
-  group      = "s3-editor"
-  policy_arn = aws_iam_policy.s3EditorPolicy.arn
-}
 
 # IAM role for Lambda execution
 resource "aws_iam_role" "lambda_exec_role" {
